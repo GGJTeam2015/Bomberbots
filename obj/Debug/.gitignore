@@ -1,6 +1,1 @@
-/Library/
-*.sln
-/Temp/
-*.csproj
 /DesignTimeResolveAssemblyReferencesInput.cache
-*.v12.suo
