@@ -4,16 +4,15 @@ using System.Collections;
 public class followObject : MonoBehaviour {
 
 	public Transform objectToFollow;
+    public float smoothness;
 
     private Vector3 initialDistance = new Vector3(0.0f, 0.0f, 0.0f);
 
 	// Use this for initialization
 	void Start () {
 
-        initialDistance.x = objectToFollow.transform.position.x - this.transform.position.x;
-        initialDistance.y = objectToFollow.transform.position.y - this.transform.position.y;
-        initialDistance.z = objectToFollow.transform.position.z - this.transform.position.z;
-	
+        initialDistance = objectToFollow.transform.position - this.transform.position;
+        
 	}
 	
 	// Update is called once per frame
@@ -26,9 +25,9 @@ public class followObject : MonoBehaviour {
         this.transform.LookAt(objectToFollow);
 
         // Follow object
-        float t =  Vector3.Distance(this.transform.position, pointToGo);
+        float t =  Vector3.Distance(this.transform.position, pointToGo) / smoothness;
         this.transform.position = Vector3.Lerp(this.transform.position, pointToGo, t);
-	
+
 	}
 
     
