@@ -5,7 +5,7 @@ public class boxBehaviour : MonoBehaviour {
 
 	// The behaviour of the environmenral destructable box
 
-    public float probOfDropItem = 0.1f;
+	public float probOfDropItem = 0.1f;
 
 	// Use this for initialization
 	void Start () {

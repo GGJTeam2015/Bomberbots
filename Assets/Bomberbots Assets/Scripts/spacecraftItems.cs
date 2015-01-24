@@ -14,6 +14,7 @@ public class spacecraftItems : MonoBehaviour {
 		"Health Shield"
 	};
 
+    // Space craft prefabs
 
 	public string[] getCraftItems()
 	{ return craftItems; }
