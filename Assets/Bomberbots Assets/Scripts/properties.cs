@@ -6,6 +6,7 @@ public class properties : MonoBehaviour {
 
     public int startHealth = 100;
     public List<Tags> tags = new List<Tags>(5);
+    public string itemName = "";
 
     private int health;
 
@@ -18,6 +19,16 @@ public class properties : MonoBehaviour {
     public bool isDestructable()
     {
         return tags.Exists(x => x == Tags.Destructable);
+    }
+
+    public bool isPlayer()
+    {
+        return tags.Exists(x => x == Tags.Player);
+    }
+
+    public bool isItem()
+    {
+        return tags.Exists(x => x == Tags.Item);
     }
 
     public void damage(int amount)

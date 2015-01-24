@@ -94,9 +94,13 @@ public class safeZoneBehaviour : MonoBehaviour {
 	// Check if craft objects entered the safe zone
 	void OnTriggerEnter(Collider coll) 
 	{
-		string tagOfCollider = coll.gameObject.tag;
 
-		if (tagOfCollider == "Player")
+        if (coll.GetComponent<properties>() == null)
+        {
+            return;
+        }
+
+		if (coll.GetComponent<properties>().isPlayer())
 		{
 			// Get script and tags
 			backpack bpscript = coll.GetComponent<backpack>();
