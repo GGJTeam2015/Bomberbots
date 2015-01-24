@@ -70,12 +70,18 @@ public class safeZoneBehaviour : MonoBehaviour {
 	{
 		bool isCondReached = true;
 
-		for (int i = 1; i != numOfItemNeeded.Length; i++ )
+		for (int i = 0; i != numOfItemNeeded.Length; i++ )
 		{
 			if(numOfItemNeeded[i] > 0)
 			{
 				isCondReached = false;
 			}
+		}
+
+
+		if (isCondReached)
+		{
+			Debug.Log("Goal is reached...");
 		}
 
 		return isCondReached;
@@ -91,24 +97,34 @@ public class safeZoneBehaviour : MonoBehaviour {
 			// Get script and tags
 			backpack bpscript = coll.GetComponent<backpack>();
 			List<string> tagsFromPlayer = bpscript.getTags();
+            List<string> itemsToRemove = new List<string>(5);
 
 			// Loose craft pieces
 			foreach (string item in tagsFromPlayer)
 			{
 				if (craftPieceTags.Exists(x => x == item))
 				{
+                    // Get item count
+                    int count = bpscript.getCount(item);
+
 					// Decrement Count
 					int idx = craftPieceTags.FindIndex(x => x == item);
-					numOfItemNeeded[idx]--;
+					numOfItemNeeded[idx] -= count;
 
-					// Destroy other object
-					bpscript.removeItem(item);
+                    // Add to remove
+                    itemsToRemove.Add(item);
 
 					// Check end condition
 					checkEndCondition();
 				}
 			}
-			
+
+            // Destroy other object
+            foreach (string item in itemsToRemove)
+            {
+                bpscript.destroyItem(item);
+            }
+            
 		}
 	}
 

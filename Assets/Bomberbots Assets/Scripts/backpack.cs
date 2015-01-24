@@ -12,15 +12,6 @@ public class backpack : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        addItem("Wrench");
-        addItem("Wrench");
-        addItem("Wrench");
-        addItem("Thrust");
-        addItem("Thrust");
-        addItem("Bomb");
-        addItem("Mine");
-
-	
 	}
 
 	// Add item to backpack
@@ -75,6 +66,22 @@ public class backpack : MonoBehaviour {
     public List<string> getTags()
     {
         return itemTags;
+    }
+
+    // Get counts of a specified item
+    public int getCount(string item)
+    {
+        // Backpack has the item
+        if (itemTags.Exists(x => x == item))
+        {
+            int idx = itemTags.FindIndex(x => x == item);
+            return itemCounts[idx];
+        }
+
+        else
+        {
+            return 0;
+        }
     }
 	
 	// Update is called once per frame
