@@ -1,26 +1,28 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class safeZoneBehaviour : MonoBehaviour {
 
-    // Do not forget to add this to safe zone
+	// Do not forget to add this to safe zone
 
 
-	// List for craft piece lists
-	public List<string> craftPieceTags = new List<string>(5);
 
-	// Parameters for random gen. goal
-	public int totalNumOfObj;
+	public int totalNumOfObj; // Parameters for random gen. goal
+	public int[] numOfItemNeeded; // Counts for craft pieces
 
-	// Counts for craft pieces
-	public int[] numOfItemNeeded;
+
+	private string[] craftPieceTags; // List for craft piece lists
 
 	// Use this for initialization
 	void Start () {
 
+		// Get craft pieces
+		craftPieceTags = spacecraftItems.craftItems;
+
 		// Initialize num of items needed
-		numOfItemNeeded = new int[craftPieceTags.Count];
+		numOfItemNeeded = new int[craftPieceTags.Length];
 		for (int i = 1; i != numOfItemNeeded.Length; i++ )
 		{
 			numOfItemNeeded[i] = 0;
@@ -38,8 +40,8 @@ public class safeZoneBehaviour : MonoBehaviour {
 
 		while (true)
 		{
-			int idx = Random.Range(0, numOfItemNeeded.Length);
-			int count = Random.Range(0, totalNumOfObj - sumArray(numOfItemNeeded) + 1);
+			int idx = UnityEngine.Random.Range(0, numOfItemNeeded.Length);
+            int count = UnityEngine.Random.Range(0, totalNumOfObj - sumArray(numOfItemNeeded) + 1);
 			numOfItemNeeded[idx] += count;
 
 
@@ -100,44 +102,41 @@ public class safeZoneBehaviour : MonoBehaviour {
 			// Get script and tags
 			backpack bpscript = coll.GetComponent<backpack>();
 			List<string> tagsFromPlayer = bpscript.getTags();
-            List<string> itemsToRemove = new List<string>(5);
+			List<string> itemsToRemove = new List<string>(5);
 
 			// Loose craft pieces
 			foreach (string item in tagsFromPlayer)
 			{
-				if (craftPieceTags.Exists(x => x == item))
+				if ( spacecraftItems.doesExist(item) )
 				{
-                    // Get item count
-                    int count = bpscript.getCount(item);
+					// Get item count
+					int count = bpscript.getCount(item);
 
 					// Decrement Count
-					int idx = craftPieceTags.FindIndex(x => x == item);
+					int idx = Array.IndexOf(craftPieceTags, item);
 					numOfItemNeeded[idx] -= count;
 
-                    // Add to remove
-                    itemsToRemove.Add(item);
+					// Add to remove
+					itemsToRemove.Add(item);
 
 					// Check end condition
 					checkEndCondition();
 				}
 			}
 
-            // Destroy other object
-            foreach (string item in itemsToRemove)
-            {
-                bpscript.destroyItem(item);
-            }
-            
+			// Destroy other object
+			foreach (string item in itemsToRemove)
+			{
+				bpscript.destroyItem(item);
+			}
+			
 		}
 	}
 
 
-	// ACCESSORS(GETTERS)
-	public List<string> getCraftPieceTags()
-	{
-		return craftPieceTags;
-	}
 
+	// ACCESSORS(GETTERS)
+	
 	public int[] getNumOfPiecesNeeded()
 	{
 		return numOfItemNeeded;

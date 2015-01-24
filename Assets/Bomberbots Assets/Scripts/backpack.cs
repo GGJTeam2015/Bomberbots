@@ -12,6 +12,7 @@ public class backpack : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
 	}
 
 	// Add item to backpack
