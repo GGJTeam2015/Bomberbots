@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class backpack : MonoBehaviour {
 
+    // Do not forget to add this to the player!
 
 	public List<string> itemTags = new List<string>(5);
 	public List<int> itemCounts = new List<int>(5);
-
 
 	// Use this for initialization
 	void Start () {
@@ -33,56 +33,55 @@ public class backpack : MonoBehaviour {
 		}
 	}
 
-
-    // Just remove one of them
-    public void removeItem(string tag)
-    {
-        // Backpack has the item
-        if (itemTags.Exists(x => x == tag))
-        {
-            int idx = itemTags.FindIndex(x => x == tag);
-            itemCounts[idx]--;
-
-            if (itemCounts[idx] <= 0)
-            {
-                destroyItem(tag);
-            }
-        }
-    }
-
-    // Just loose all of those items
-	public void destroyItem(string tag)
+	// Just remove one of them
+	public void removeItem(string tag)
 	{
-        // Backpack has the item
-        if (itemTags.Exists(x => x == tag))
-        {
-            int idx = itemTags.FindIndex(x => x == tag);
-            itemTags.RemoveAt(idx);
-            itemCounts.RemoveAt(idx);
-        }
+		// Backpack has the item
+		if (itemTags.Exists(x => x == tag))
+		{
+			int idx = itemTags.FindIndex(x => x == tag);
+			itemCounts[idx]--;
+
+			if (itemCounts[idx] <= 0)
+			{
+				destroyItem(tag);
+			}
+		}
 	}
 
-    // Get all taks
-    public List<string> getTags()
-    {
-        return itemTags;
-    }
+	// Loose all of those items
+	public void destroyItem(string tag)
+	{
+		// Backpack has the item
+		if (itemTags.Exists(x => x == tag))
+		{
+			int idx = itemTags.FindIndex(x => x == tag);
+			itemTags.RemoveAt(idx);
+			itemCounts.RemoveAt(idx);
+		}
+	}
 
-    // Get counts of a specified item
-    public int getCount(string item)
-    {
-        // Backpack has the item
-        if (itemTags.Exists(x => x == item))
-        {
-            int idx = itemTags.FindIndex(x => x == item);
-            return itemCounts[idx];
-        }
+	// Get all taks
+	public List<string> getTags()
+	{
+		return itemTags;
+	}
 
-        else
-        {
-            return 0;
-        }
-    }
+	// Get counts of a specified item
+	public int getCount(string item)
+	{
+		// Backpack has the item
+		if (itemTags.Exists(x => x == item))
+		{
+			int idx = itemTags.FindIndex(x => x == item);
+			return itemCounts[idx];
+		}
+
+		else
+		{
+			return 0;
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {

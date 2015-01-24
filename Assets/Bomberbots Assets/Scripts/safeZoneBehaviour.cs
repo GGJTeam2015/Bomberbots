@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class safeZoneBehaviour : MonoBehaviour {
 
+    // Do not forget to add this to safe zone
+
+
 	// List for craft piece lists
 	public List<string> craftPieceTags = new List<string>(5);
 
