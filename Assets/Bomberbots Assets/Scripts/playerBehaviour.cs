@@ -4,35 +4,31 @@ using System.Collections;
 public class playerBehaviour : MonoBehaviour {
 
 	public void kill()
-    {
-        Debug.Log("It is dead...");
-    }
+	{
+		Debug.Log("It is dead...");
+	}
 
-    void OnTriggerEnter(Collider coll)
-    {
-        
-        // If it is a object with property
-        if (coll.GetComponent<properties>() != null)
-        {
-            // If it is an craft item
-            if (coll.GetComponent<properties>().isItem())
-            {
+	void OnTriggerEnter(Collider coll)
+	{
+		
+		// If it is a object with property
+		if (coll.GetComponent<properties>() != null)
+		{
+			// If it is an craft item
+			if (coll.GetComponent<properties>().isItem())
+			{
 
-                // Add item to backpack
-                string itemName = coll.GetComponent<properties>().itemName;
+				// Add item to backpack
+				string itemName = coll.GetComponent<properties>().itemName;
+				gameObject.GetComponent<backpack>().addItem(itemName);
 
-
-                Debug.Log(itemName);
-
-                gameObject.GetComponent<backpack>().addItem(itemName);
-
-                // Destroy item
-                Destroy(coll.gameObject);
-            }
-        }
-    }
-    
-    // Use this for initialization
+				// Destroy item
+				Destroy(coll.gameObject);
+			}
+		}
+	}
+	
+	// Use this for initialization
 	void Start () {
 	
 	}
