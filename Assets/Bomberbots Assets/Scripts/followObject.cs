@@ -16,7 +16,7 @@ public class followObject : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		// Determine point to go
 		Vector3 pointToGo = objectToFollow.transform.position - initialDistance;

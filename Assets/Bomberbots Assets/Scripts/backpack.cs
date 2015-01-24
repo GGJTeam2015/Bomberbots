@@ -9,11 +9,6 @@ public class backpack : MonoBehaviour {
 	public List<string> itemTags = new List<string>(5);
 	public List<int> itemCounts = new List<int>(5);
 
-	// Use this for initialization
-	void Start () {
-
-
-	}
 
 	// Add item to backpack
 	// If backpack already has that item, increase its count
@@ -83,7 +78,13 @@ public class backpack : MonoBehaviour {
 			return 0;
 		}
 	}
-	
+
+
+    // Use this for initialization
+    void Start()
+    {
+    }
+
 	// Update is called once per frame
 	void Update () {
 	

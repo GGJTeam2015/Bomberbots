@@ -7,10 +7,10 @@ public class safeZoneBehaviour : MonoBehaviour {
 
 	// Do not forget to add this to safe zone
 
-
+    public GameObject scItems;
 
 	public int totalNumOfObj; // Parameters for random gen. goal
-	public int[] numOfItemNeeded; // Counts for craft pieces
+	private int[] numOfItemNeeded; // Counts for craft pieces
 
 
 	private string[] craftPieceTags; // List for craft piece lists
@@ -19,7 +19,7 @@ public class safeZoneBehaviour : MonoBehaviour {
 	void Start () {
 
 		// Get craft pieces
-		craftPieceTags = spacecraftItems.craftItems;
+		craftPieceTags = scItems.GetComponent<spacecraftItems>().craftItems;
 
 		// Initialize num of items needed
 		numOfItemNeeded = new int[craftPieceTags.Length];
@@ -31,7 +31,6 @@ public class safeZoneBehaviour : MonoBehaviour {
 		// Generate goals
 		genGoals();
 	}
-
 
 	// Fill *numOfItemNeeded* for generating random goals
 	void genGoals()
@@ -107,7 +106,7 @@ public class safeZoneBehaviour : MonoBehaviour {
 			// Loose craft pieces
 			foreach (string item in tagsFromPlayer)
 			{
-				if ( spacecraftItems.doesExist(item) )
+				if ( scItems.GetComponent<spacecraftItems>().doesExist(item) )
 				{
 					// Get item count
 					int count = bpscript.getCount(item);
@@ -132,7 +131,6 @@ public class safeZoneBehaviour : MonoBehaviour {
 			
 		}
 	}
-
 
 
 	// ACCESSORS(GETTERS)

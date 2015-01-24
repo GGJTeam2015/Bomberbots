@@ -1,46 +1,38 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class spacecraftItems : MonoBehaviour {
 
 	// Space craft item enums
-	static public string[] craftItems = new string[]
+	public string[] craftItems;
+
+	// Space craft prefabs
+	public GameObject[] craftItemPrefabs;
+	
+
+	public GameObject getCraftItemPrefab(string name)
 	{
-		"Wrench",
-		"Engine",
-		"Thrusters",
-		"Propellant",
-		"Health Shield"
-	};
-
-    // Space craft prefabs
-
-	public string[] getCraftItems()
-	{ return craftItems; }
-
-	// Use this for initialization
-	void Start () {
-	
+		return craftItemPrefabs[getItemIdx(name)];
 	}
 
-    static public bool doesExist(string item)
-    {
-        bool has = false;
+	public int getItemIdx(string name)
+	{ return Array.IndexOf(craftItems, name); }
 
-        foreach (string str in craftItems)
-        {
-            if (string.Compare(str, item) == 0)
-            {
-                has = true;
-            }
-        }
+	public bool doesExist(string item)
+	{
+		bool has = false;
 
-        return has;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
+		foreach (string str in craftItems)
+		{
+			if (string.Compare(str, item) == 0)
+			{
+				has = true;
+			}
+		}
+
+		return has;
 	}
+
 }
