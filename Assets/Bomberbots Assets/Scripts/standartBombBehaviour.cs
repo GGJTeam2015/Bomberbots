@@ -71,7 +71,6 @@ public class standartBombBehaviour : MonoBehaviour {
         if (isActivated)
         {
             timeToExplode -= Time.deltaTime;
-
             Debug.Log("Time: " + timeToExplode);
         }
 
@@ -81,11 +80,5 @@ public class standartBombBehaviour : MonoBehaviour {
             activate();
         }
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            trigger();
-            Debug.Log("Triggered");
-        }
 	}
 }
