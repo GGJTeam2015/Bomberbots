@@ -4,3 +4,4 @@
 *.csproj
 /DesignTimeResolveAssemblyReferencesInput.cache
 *.v12.suo
+/build.force
